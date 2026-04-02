@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["ui/src/*"]
+    }
+  },
+  "include": [
+    "src",
+    "ui/src",
+    "vite.*.config.ts",
+    "forge.config.ts",
+    "forge.env.d.ts",
+    "*.ts",
+    "*.tsx"
+  ]
+}
