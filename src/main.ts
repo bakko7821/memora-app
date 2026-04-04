@@ -17,10 +17,10 @@ function createWindow() {
   });
 
   if (isDev) {
-    win.loadURL("http://localhost:5173");
+    win.loadURL("http://127.0.0.1:5173");
     win.webContents.openDevTools();
   } else {
-    win.loadFile(path.join(__dirname, "../ui/dist/index.html"));
+    win.loadFile(path.join(__dirname, "../ui/index.html"));
   }
 }
 
