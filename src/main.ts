@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import path from "node:path";
 
 const isDev = !app.isPackaged;
@@ -9,6 +9,8 @@ function createWindow() {
     height: 800,
     minWidth: 900,
     minHeight: 600,
+    frame: false,
+    titleBarStyle: "hidden",
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
@@ -26,6 +28,27 @@ function createWindow() {
 
 app.whenReady().then(() => {
   createWindow();
+
+  ipcMain.on("window:minimize", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    win?.minimize();
+  });
+
+  ipcMain.on("window:maximize-toggle", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    if (!win) return;
+
+    if (win.isMaximized()) {
+      win.unmaximize();
+    } else {
+      win.maximize();
+    }
+  });
+
+  ipcMain.on("window:close", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    win?.close();
+  });
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {

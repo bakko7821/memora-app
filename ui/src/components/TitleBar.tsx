@@ -6,9 +6,9 @@ export const TitleBar = () => {
                 <h1 className="text-base font-semibold text-pink-300">Memora</h1>
             </div>
             <div className="flex flex-row gap-0">
-                <button className="w-8 h-8 bg-amber-50"></button>
-                <button className="w-8 h-8 bg-red-300"></button>
-                <button className="w-8 h-8 bg-green-300"></button>
+                <button onClick={() => window.electronAPI.minimize()} className="w-8 h-8 bg-amber-50"></button>
+                <button onClick={() => window.electronAPI.maximizeToggle()} className="w-8 h-8 bg-red-300"></button>
+                <button onClick={() => window.electronAPI.close()} className="w-8 h-8 bg-green-300"></button>
             </div>
         </header>
     )
