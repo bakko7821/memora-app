@@ -2,6 +2,21 @@ import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("electronAPI", {
   minimize: () => ipcRenderer.send("window:minimize"),
-  maximizeToggle: () => ipcRenderer.send("window:maximize-toggle"),
   close: () => ipcRenderer.send("window:close"),
+
+  maximizeToggle: () => ipcRenderer.invoke("window:maximize-toggle"),
+
+  isMaximized: () => ipcRenderer.invoke("window:is-maximized"),
+
+  onMaximizedChanged: (callback: (value: boolean) => void) => {
+    const listener = (_event: Electron.IpcRendererEvent, value: boolean) => {
+      callback(value);
+    };
+
+    ipcRenderer.on("window:maximized-changed", listener);
+
+    return () => {
+      ipcRenderer.removeListener("window:maximized-changed", listener);
+    };
+  },
 });

@@ -4,8 +4,10 @@ declare global {
   interface Window {
     electronAPI: {
       minimize: () => void;
-      maximizeToggle: () => void;
       close: () => void;
+      maximizeToggle: () => Promise<void>;
+      isMaximized: () => Promise<boolean>;
+      onMaximizedChanged: (callback: (value: boolean) => void) => () => void;
     };
   }
 }

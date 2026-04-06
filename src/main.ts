@@ -24,6 +24,14 @@ function createWindow() {
   } else {
     win.loadFile(path.join(__dirname, "../ui/index.html"));
   }
+
+  win.on("maximize", () => {
+    win?.webContents.send("window:maximized-changed", true);
+  });
+
+  win.on("unmaximize", () => {
+    win?.webContents.send("window:maximized-changed", false);
+  });
 }
 
 app.whenReady().then(() => {
@@ -34,8 +42,8 @@ app.whenReady().then(() => {
     win?.minimize();
   });
 
-  ipcMain.on("window:maximize-toggle", () => {
-    const win = BrowserWindow.getFocusedWindow();
+  ipcMain.handle("window:maximize-toggle", (event) => {
+    const win = BrowserWindow.fromWebContents(event.sender);
     if (!win) return;
 
     if (win.isMaximized()) {
@@ -43,6 +51,11 @@ app.whenReady().then(() => {
     } else {
       win.maximize();
     }
+  });
+
+  ipcMain.handle("window:is-maximized", (event) => {
+    const win = BrowserWindow.fromWebContents(event.sender);
+    return win?.isMaximized() ?? false;
   });
 
   ipcMain.on("window:close", () => {
