@@ -4,6 +4,7 @@ import MaximizeIcon from "../assets/icons/Maximize2.svg?react";
 import RestoreIcon from "../assets/icons/WindowRestoreLine.svg?react";
 // import LogoImage from "../assets/images/icon.png";
 import { useEffect, useState } from "react";
+import { deepOceanTheme } from "../utils/variables";
 
 export const TitleBar = () => {
   const [isMaximized, setIsMaximized] = useState(false);
@@ -39,12 +40,17 @@ export const TitleBar = () => {
       style={
         {
           WebkitAppRegion: "drag",
-          backgroundColor: "#1c1c1c",
+          backgroundColor: deepOceanTheme.header,
         } as React.CSSProperties
       }
     >
       <div className="flex flex-row items-center justify-center">
-        <h1 className="px-2 text-xl font-semibold text-pink-300">Memora</h1>
+        <h1
+          className="px-2 text-xl font-semibold "
+          style={{ color: deepOceanTheme.primary }}
+        >
+          Memora
+        </h1>
       </div>
       <div
         className="flex flex-row gap-0"
@@ -52,13 +58,13 @@ export const TitleBar = () => {
       >
         <button
           onClick={() => window.electronAPI.minimize()}
-          className="flex items-center justify-center p-2 bg-transparent hover:bg-white/10"
+          className="flex items-center justify-center p-2 bg-transparent hover:bg-(--hover-card) transition-colors"
         >
           <MinimizeIcon width={24} height={24} color="#ffffff" />
         </button>
         <button
           onClick={handleMaximizeToggle}
-          className="flex items-center justify-center p-2 bg-transparent hover:bg-white/10"
+          className="flex items-center justify-center p-2 bg-transparent hover:bg-(--hover-card) transition-colors"
         >
           <WindowIcon width={24} height={24} color="#ffffff" />
         </button>

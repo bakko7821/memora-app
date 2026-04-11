@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
-body, html, #root {
+:root {
+  --hover-card: #22304a;
+  --hover-primary: #5a92ff;
+  --hover-secondary: #b3bcc8;
+}
+
+body,
+html,
+#root {
   overflow: hidden;
   margin: 0;
 }
