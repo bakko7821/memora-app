@@ -1,18 +1,15 @@
 import { TitleBar } from "./components/TitleBar";
 import StartPage from "./pages/StartPage";
-import { deepOceanTheme } from "./utils/variables";
+import { useThemeVars } from "./utils/theme/useThemeVars";
 
 export default function App() {
   return (
     <div
-      className="min-h-screen w-screen flex flex-col"
-      style={{ backgroundColor: deepOceanTheme.background }}
+      style={useThemeVars()}
+      className="min-h-screen w-screen flex flex-col bg-(--bg)"
     >
       <TitleBar />
-      <div
-        className="w-full flex-1 items-center justify-center flex "
-        style={{ backgroundColor: deepOceanTheme.background }}
-      >
+      <div className="w-full flex-1 items-center justify-center flex ">
         <StartPage />
       </div>
     </div>

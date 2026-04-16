@@ -2,9 +2,7 @@ import CrossIcon from "../assets/icons/cross-svgrepo-com.svg?react";
 import MinimizeIcon from "../assets/icons/minus-svgrepo-com.svg?react";
 import MaximizeIcon from "../assets/icons/Maximize2.svg?react";
 import RestoreIcon from "../assets/icons/restore-16-regular-svgrepo-com.svg?react";
-// import LogoImage from "../assets/images/icon.png";
 import { useEffect, useState } from "react";
-import { deepOceanTheme } from "../utils/variables";
 
 export const TitleBar = () => {
   const [isMaximized, setIsMaximized] = useState(false);
@@ -36,21 +34,15 @@ export const TitleBar = () => {
 
   return (
     <header
-      className="w-full p-0 flex flex-row items-center justify-between"
+      className="w-full p-0 flex flex-row items-center justify-between bg-(--header)"
       style={
         {
           WebkitAppRegion: "drag",
-          backgroundColor: deepOceanTheme.header,
         } as React.CSSProperties
       }
     >
       <div className="flex flex-row items-center justify-center">
-        <p
-          className="pl-3 text-base font-normal "
-          style={{ color: deepOceanTheme.text }}
-        >
-          Memora
-        </p>
+        <p className="pl-3 text-base font-normal text-(--text)">Memora</p>
       </div>
       <div
         className="flex flex-row gap-0"

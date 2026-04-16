@@ -1,4 +1,4 @@
-export const deepOceanTheme = {
+export const theme = {
   background: "#0A0F1C",
   header: "#121A2B",
   card: "#1A2438",
