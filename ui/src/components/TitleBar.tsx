@@ -1,7 +1,7 @@
-import CrossIcon from "../assets/icons/CrossFilled.svg?react";
-import MinimizeIcon from "../assets/icons/Minus.svg?react";
+import CrossIcon from "../assets/icons/cross-svgrepo-com.svg?react";
+import MinimizeIcon from "../assets/icons/minus-svgrepo-com.svg?react";
 import MaximizeIcon from "../assets/icons/Maximize2.svg?react";
-import RestoreIcon from "../assets/icons/WindowRestoreLine.svg?react";
+import RestoreIcon from "../assets/icons/restore-16-regular-svgrepo-com.svg?react";
 // import LogoImage from "../assets/images/icon.png";
 import { useEffect, useState } from "react";
 import { deepOceanTheme } from "../utils/variables";
@@ -45,12 +45,12 @@ export const TitleBar = () => {
       }
     >
       <div className="flex flex-row items-center justify-center">
-        <h1
-          className="px-2 text-xl font-semibold "
-          style={{ color: deepOceanTheme.primary }}
+        <p
+          className="pl-3 text-base font-normal "
+          style={{ color: deepOceanTheme.text }}
         >
           Memora
-        </h1>
+        </p>
       </div>
       <div
         className="flex flex-row gap-0"
@@ -58,19 +58,19 @@ export const TitleBar = () => {
       >
         <button
           onClick={() => window.electronAPI.minimize()}
-          className="flex items-center justify-center p-2 bg-transparent hover:bg-(--hover-card) transition-colors"
+          className="flex items-center justify-center px-2 py-1 bg-transparent hover:bg-(--hover-card) transition-colors"
         >
           <MinimizeIcon width={24} height={24} color="#ffffff" />
         </button>
         <button
           onClick={handleMaximizeToggle}
-          className="flex items-center justify-center p-2 bg-transparent hover:bg-(--hover-card) transition-colors"
+          className="flex items-center justify-center px-2 py-1 bg-transparent hover:bg-(--hover-card) transition-colors"
         >
           <WindowIcon width={24} height={24} color="#ffffff" />
         </button>
         <button
           onClick={() => window.electronAPI.close()}
-          className="flex items-center justify-center p-2 bg-transparent hover:bg-red-400"
+          className="flex items-center justify-center px-2 py-1 bg-transparent hover:bg-red-400 transition-colors"
         >
           <CrossIcon width={24} height={24} color="#ffffff" />
         </button>

@@ -1,4 +1,5 @@
 import { TitleBar } from "./components/TitleBar";
+import StartPage from "./pages/StartPage";
 import { deepOceanTheme } from "./utils/variables";
 
 export default function App() {
@@ -9,9 +10,11 @@ export default function App() {
     >
       <TitleBar />
       <div
-        className="flex-1 "
+        className="w-full flex-1 items-center justify-center flex "
         style={{ backgroundColor: deepOceanTheme.background }}
-      ></div>
+      >
+        <StartPage />
+      </div>
     </div>
   );
 }
