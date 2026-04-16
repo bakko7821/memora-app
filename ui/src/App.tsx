@@ -1,5 +1,5 @@
-import { TitleBar } from "./components/TitleBar";
-import StartPage from "./pages/StartPage";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./app/router";
 import { useThemeVars } from "./utils/theme/useThemeVars";
 
 export default function App() {
@@ -8,10 +8,7 @@ export default function App() {
       style={useThemeVars()}
       className="min-h-screen w-screen flex flex-col bg-(--bg)"
     >
-      <TitleBar />
-      <div className="w-full flex-1 items-center justify-center flex ">
-        <StartPage />
-      </div>
+      <RouterProvider router={router} />
     </div>
   );
 }
