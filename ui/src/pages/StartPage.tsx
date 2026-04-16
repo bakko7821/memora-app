@@ -1,4 +1,5 @@
 import Icon from "../assets/images/icon.png";
+import HelpIcon from "../assets/icons/help-circle-svgrepo-com.svg?react";
 import { LanguageDropDown } from "../components/LanguageDropDown";
 
 export default function StartPage() {
@@ -44,7 +45,13 @@ export default function StartPage() {
         </div>
         <div className="flex w-full items-center justify-between">
           <LanguageDropDown />
-          <div className=""></div>
+          <button className="group cursor-pointer p-1">
+            <HelpIcon
+              width={24}
+              height={24}
+              className="text-(--text-secondary) group-hover:text-(--text) transition-colors"
+            />
+          </button>
         </div>
       </div>
     </div>
