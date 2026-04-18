@@ -6,6 +6,7 @@ import { MainLayout } from "./layouts/MainLayout";
 import NotFoundPage from "./pages/NotFoundPage";
 import MainPage from "./pages/MainPage";
 import HelpPage from "./pages/HelpPage";
+import CreateFolderPage from "./pages/CreateFolderPage";
 
 export default function App() {
   const themeVars = useThemeVars();
@@ -19,7 +20,7 @@ export default function App() {
         <Routes>
           <Route element={<StartLayout />}>
             <Route path="/" element={<StartPage />} />
-            <Route path="/create-folder" element={<StartPage />} />
+            <Route path="/create-folder" element={<CreateFolderPage />} />
             <Route path="/help" element={<HelpPage />} />
           </Route>
           <Route element={<MainLayout />}>
