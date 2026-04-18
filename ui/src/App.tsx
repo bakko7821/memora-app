@@ -19,6 +19,7 @@ export default function App() {
         <Routes>
           <Route element={<StartLayout />}>
             <Route path="/" element={<StartPage />} />
+            <Route path="/create-folder" element={<StartPage />} />
             <Route path="/help" element={<HelpPage />} />
           </Route>
           <Route element={<MainLayout />}>

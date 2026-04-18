@@ -1,9 +1,11 @@
 import Icon from "../assets/images/icon.png";
 import HelpIcon from "../assets/icons/help-circle-svgrepo-com.svg?react";
 import { LanguageDropDown } from "../components/LanguageDropDown";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function StartPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col gap-8 items-center justify-center">
       <div className="flex flex-col gap-2 items-center justify-center">
@@ -26,7 +28,10 @@ export default function StartPage() {
                 Создайте новое хранилище Memora внутри указанной папки.
               </p>
             </div>
-            <button className="cursor-pointer rounded-xl min-w-37.5 px-3 py-1.5 text-(--text) bg-(--primary) hover:bg-(--hover-primary) transition-colors">
+            <button
+              onClick={() => navigate("/create-folder")}
+              className="cursor-pointer rounded-xl min-w-37.5 px-3 py-1.5 text-(--text) bg-(--primary) hover:bg-(--hover-primary) transition-colors"
+            >
               Создать
             </button>
           </div>
