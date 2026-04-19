@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import BackArrowIcon from "../assets/icons/arrow-narrow-left-svgrepo-com.svg?react";
+import BackArrowIcon from "../../assets/icons/arrow-narrow-left-svgrepo-com.svg?react";
 interface BackButtonProps {
   path?: string;
 }

@@ -25,6 +25,8 @@ export const themeToCSSVars = (themeObj = theme) => {
     "--disabled-text": themeObj.disabled.text,
     "--disabled-secondary": themeObj.disabled.secondary,
 
+    "--muted-text": themeObj.muted.text,
+
     "--selected-card": themeObj.selected.card,
   } as React.CSSProperties;
 };

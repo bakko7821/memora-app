@@ -1,4 +1,4 @@
-import { BackButton } from "../components/BackButton";
+import { BackButton } from "../components/ui/BackButton";
 
 export default function HelpPage() {
   return (

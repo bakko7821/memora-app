@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Icon from "../assets/images/icon.png";
-import { BackButton } from "../components/BackButton";
+import { BackButton } from "../components/ui/BackButton";
+import { StartInput } from "../components/ui/StartInput";
 
 export default function CreateFolderPage() {
-  // eslint-disable-next-line no-useless-escape
-  const [path, setPath] = useState("C:\Users\rospanne\Documents\Memora");
+  //   const [path, setPath] = useState("");
+  const [folderName, setFolderName] = useState("");
+
   return (
     <div className="flex flex-col gap-8 items-center justify-center">
       <div className="flex flex-col gap-2 items-center justify-center">
@@ -28,26 +30,26 @@ export default function CreateFolderPage() {
             <div className="flex items-center justify-between gap-12">
               <div className="flex flex-col max-w-75">
                 <p className="text-base font-medium text-(--text-secondary)">
-                  Создать новое хранилище
+                  Имя хранилища
                 </p>
                 <p className="text-sm font-normal text-(--disabled-text)">
-                  Создайте новое хранилище Memora внутри указанной папки.
+                  Укажите имя нового хранилища.
                 </p>
               </div>
-              <button className="cursor-pointer rounded-xl min-w-37.5 px-3 py-1.5 text-(--text) bg-(--primary) hover:bg-(--hover-primary) transition-colors">
-                Создать
-              </button>
+              <StartInput placeholder="Имя хранилища" value={folderName} />
             </div>
             <div className="w-full h-px bg-(--disabled-text)"></div>
             <div className="flex items-center justify-between gap-12">
               <div className="flex flex-col min-w-75">
                 <p className="text-base font-medium text-(--text-secondary)">
-                  Открыть папку как хранилище
+                  Расположение
                 </p>
                 <p className="whitespace-nowrap text-sm font-normal text-(--disabled-text)">
                   Ваше новое хранилище будет расположено в:
                 </p>
-                <p className="text-sm font-medium text-(--primary)">{path}</p>
+                <p className="text-sm font-medium text-(--primary)">
+                  C:\Users\rospanne\Documents\Memora
+                </p>
               </div>
               <button className="cursor-pointer rounded-xl min-w-37.5 px-3 py-1.5 text-(--text) bg-(--header) hover:bg-(--hover-card) transition-colors">
                 Просмотр
