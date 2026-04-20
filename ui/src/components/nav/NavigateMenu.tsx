@@ -3,14 +3,19 @@ import { NavigateComponent } from "./NavigateComponent";
 
 export const NavigateMenu = () => {
   return (
-    <nav className="bg-(--card) p-4 flex flex-col items-center justify-between h-full">
-      {NavComponentsArray.map((navComponent) => (
-        <NavigateComponent
-          path={navComponent.path || ""}
-          name={navComponent.name || ""}
-          type={navComponent.type || "button"}
-        />
-      ))}
-    </nav>
+    <div className="bg-(--card) flex flex-col min-h-full justify-between">
+      <nav className="flex flex-col gap-2">
+        {NavComponentsArray.map((navComponent) => (
+          <NavigateComponent
+            key={navComponent.id}
+            id={navComponent.id || 0}
+            path={navComponent.path || ""}
+            name={navComponent.name || ""}
+            type={navComponent.type || "button"}
+            icon={navComponent.icon || ""}
+          />
+        ))}
+      </nav>
+    </div>
   );
 };
