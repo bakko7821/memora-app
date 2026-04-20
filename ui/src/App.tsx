@@ -14,7 +14,7 @@ export default function App() {
   return (
     <div
       style={themeVars}
-      className="min-h-screen w-screen flex flex-col bg-(--bg)"
+      className="min-h-screen w-screen flex flex-col items-start justify-start bg-(--bg)"
     >
       <BrowserRouter>
         <Routes>

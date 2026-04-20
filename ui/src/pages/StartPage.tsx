@@ -44,7 +44,10 @@ export default function StartPage() {
                 Выберите папку, содержащую .md файлы.
               </p>
             </div>
-            <button className="cursor-pointer rounded-xl min-w-37.5 px-3 py-1.5 text-(--text) bg-(--header) hover:bg-(--hover-card) transition-colors">
+            <button
+              onClick={() => navigate("/main")}
+              className="cursor-pointer rounded-xl min-w-37.5 px-3 py-1.5 text-(--text) bg-(--header) hover:bg-(--hover-card) transition-colors"
+            >
               Открыть
             </button>
           </div>
