@@ -2,9 +2,18 @@ import Icon from "../assets/images/icon.png";
 import HelpIcon from "../assets/icons/help-circle-svgrepo-com.svg?react";
 import { LanguageDropDown } from "../components/LanguageDropDown";
 import { Link, useNavigate } from "react-router-dom";
+import { vaultService } from "../features/vault/vaultService";
+import { useVaultStore } from "../features/vault/vaultStore";
 
 export default function StartPage() {
   const navigate = useNavigate();
+  const setVault = useVaultStore((s) => s.setVault);
+
+  const handleOpen = async () => {
+    const { path, files } = await vaultService.openVault();
+    setVault(path, files);
+    navigate("/main");
+  };
 
   return (
     <div className="flex flex-col gap-8 items-center justify-center">
@@ -45,7 +54,7 @@ export default function StartPage() {
               </p>
             </div>
             <button
-              onClick={() => navigate("/main")}
+              onClick={handleOpen}
               className="cursor-pointer rounded-xl min-w-37.5 px-3 py-1.5 text-(--text) bg-(--header) hover:bg-(--hover-card) transition-colors"
             >
               Открыть

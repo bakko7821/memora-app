@@ -19,4 +19,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
       ipcRenderer.removeListener("window:maximized-changed", listener);
     };
   },
+
+  selectFolder: () => ipcRenderer.invoke("select-folder"),
+  createVault: (basePath: string, folderName: string) =>
+    ipcRenderer.invoke("create-vault", basePath, folderName),
+  readDir: (path: string) => ipcRenderer.invoke("read-dir", path),
 });

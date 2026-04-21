@@ -8,6 +8,9 @@ declare global {
       maximizeToggle: () => Promise<void>;
       isMaximized: () => Promise<boolean>;
       onMaximizedChanged: (callback: (value: boolean) => void) => () => void;
+      selectFolder: () => Promise<string>;
+      createVault: (basePath: string, folderName: string) => Promise<string>;
+      readDir: (path: string) => Promise<string[]>;
     };
   }
 }

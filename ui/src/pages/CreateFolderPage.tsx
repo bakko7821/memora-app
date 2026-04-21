@@ -2,10 +2,30 @@ import { useState } from "react";
 import Icon from "../assets/images/icon.png";
 import { BackButton } from "../components/ui/BackButton";
 import { StartInput } from "../components/ui/StartInput";
+import { useNavigate } from "react-router-dom";
+import { useVaultStore } from "../features/vault/vaultStore";
+import { vaultService } from "../features/vault/vaultService";
 
 export default function CreateFolderPage() {
-  //   const [path, setPath] = useState("");
+  const navigate = useNavigate();
+  const setVault = useVaultStore((s) => s.setVault);
+
+  const [path, setPath] = useState("");
   const [folderName, setFolderName] = useState("");
+
+  const handleSelectPath = async () => {
+    const selected = await window.electronAPI.selectFolder();
+    setPath(selected);
+  };
+
+  const handleCreate = async () => {
+    if (!path || !folderName) return;
+
+    const finalPath = await vaultService.createVault(path, folderName);
+
+    setVault(finalPath, []);
+    navigate("/main");
+  };
 
   return (
     <div className="flex flex-col gap-8 items-center justify-center">
@@ -47,17 +67,21 @@ export default function CreateFolderPage() {
                 <p className="whitespace-nowrap text-sm font-normal text-(--disabled-text)">
                   Ваше новое хранилище будет расположено в:
                 </p>
-                <p className="text-sm font-medium text-(--primary)">
-                  C:\Users\rospanne\Documents\Memora
-                </p>
+                <p className="text-sm font-medium text-(--primary)">{path}</p>
               </div>
-              <button className="cursor-pointer rounded-xl min-w-37.5 px-3 py-1.5 text-(--text) bg-(--header) hover:bg-(--hover-card) transition-colors">
+              <button
+                onClick={handleSelectPath}
+                className="cursor-pointer rounded-xl min-w-37.5 px-3 py-1.5 text-(--text) bg-(--header) hover:bg-(--hover-card) transition-colors"
+              >
                 Просмотр
               </button>
             </div>
           </div>
         </div>
-        <button className="cursor-pointer rounded-xl min-w-37.5 px-3 py-1.5 text-(--text) bg-(--primary) hover:bg-(--hover-primary) transition-colors">
+        <button
+          onClick={handleCreate}
+          className="cursor-pointer rounded-xl min-w-37.5 px-3 py-1.5 text-(--text) bg-(--primary) hover:bg-(--hover-primary) transition-colors"
+        >
           Создать
         </button>
       </div>

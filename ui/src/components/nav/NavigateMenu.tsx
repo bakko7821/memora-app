@@ -1,4 +1,4 @@
-import { NavComponentsArray } from "../../utils/types/navigate";
+import { NavComponentsArray } from "../../entities/types/navigate";
 import { NavigateComponent } from "./NavigateComponent";
 
 export const NavigateMenu = () => {

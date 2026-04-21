@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { NavComponent } from "../../utils/types/navigate";
+import type { NavComponent } from "../../entities/types/navigate";
 
 export const NavigateComponent = ({ path, icon: Icon, type }: NavComponent) => {
   return (
