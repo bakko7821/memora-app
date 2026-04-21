@@ -15,11 +15,13 @@ export default function CreateFolderPage() {
 
   const handleSelectPath = async () => {
     const selected = await window.electronAPI.selectFolder();
+    if (!selected) return;
+
     setPath(selected);
   };
 
   const handleCreate = async () => {
-    if (!path || !folderName) return;
+    if (!path || !folderName.trim()) return;
 
     const finalPath = await vaultService.createVault(path, folderName);
 
@@ -56,7 +58,11 @@ export default function CreateFolderPage() {
                   Укажите имя нового хранилища.
                 </p>
               </div>
-              <StartInput placeholder="Имя хранилища" value={folderName} />
+              <StartInput
+                placeholder="Имя хранилища"
+                value={folderName}
+                onChange={setFolderName}
+              />
             </div>
             <div className="w-full h-px bg-(--disabled-text)"></div>
             <div className="flex items-center justify-between gap-12">
@@ -67,7 +73,9 @@ export default function CreateFolderPage() {
                 <p className="whitespace-nowrap text-sm font-normal text-(--disabled-text)">
                   Ваше новое хранилище будет расположено в:
                 </p>
-                <p className="text-sm font-medium text-(--primary)">{path}</p>
+                {path && (
+                  <p className="text-sm font-medium text-(--primary)">{path}</p>
+                )}
               </div>
               <button
                 onClick={handleSelectPath}

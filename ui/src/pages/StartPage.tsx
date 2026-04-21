@@ -10,8 +10,11 @@ export default function StartPage() {
   const setVault = useVaultStore((s) => s.setVault);
 
   const handleOpen = async () => {
-    const { path, files } = await vaultService.openVault();
-    setVault(path, files);
+    const vault = await vaultService.openVault();
+
+    if (!vault) return;
+
+    setVault(vault.path, vault.files);
     navigate("/main");
   };
 
