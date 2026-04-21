@@ -1,5 +1,7 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import path from "node:path";
+import "./ipc/dialog";
+import "./ipc/fs";
 
 const isDev = !app.isPackaged;
 

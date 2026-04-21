@@ -5,6 +5,8 @@ export const vaultService = {
 
   async openVault() {
     const path = await window.electronAPI.selectFolder();
+    if (!path) return;
+
     const files = await window.electronAPI.readDir(path);
     return { path, files };
   },

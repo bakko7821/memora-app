@@ -10,7 +10,7 @@ export default function CreateFolderPage() {
   const navigate = useNavigate();
   const setVault = useVaultStore((s) => s.setVault);
 
-  const [path, setPath] = useState("");
+  const [path, setPath] = useState<string | null>(null);
   const [folderName, setFolderName] = useState("");
 
   const handleSelectPath = async () => {
