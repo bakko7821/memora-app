@@ -7,6 +7,10 @@ ipcMain.handle("create-vault", (_, basePath: string, folderName: string) => {
   return createVault(basePath, folderName);
 });
 
-ipcMain.handle("read-dir", (_, folderPath: string) => {
-  return fs.readdirSync(folderPath);
+ipcMain.handle("read-dir", async (_, folderPath: string) => {
+  const files = await fs.promises.readdir(folderPath, {
+    withFileTypes: true,
+  });
+
+  return files.filter((f) => f.isFile()).map((f) => f.name);
 });

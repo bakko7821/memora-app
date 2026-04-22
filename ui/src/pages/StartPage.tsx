@@ -4,19 +4,38 @@ import { LanguageDropDown } from "../components/LanguageDropDown";
 import { Link, useNavigate } from "react-router-dom";
 import { vaultService } from "../features/vault/vaultService";
 import { useVaultStore } from "../features/vault/vaultStore";
+import { useVaultRuntimeStore } from "../features/vault/vaultRuntimeStore";
+import { useEffect } from "react";
 
 export default function StartPage() {
   const navigate = useNavigate();
-  const setVault = useVaultStore((s) => s.setVault);
+  const setPath = useVaultStore((s) => s.setPath);
+  const setFiles = useVaultRuntimeStore((s) => s.setFiles);
 
   const handleOpen = async () => {
     const vault = await vaultService.openVault();
 
     if (!vault) return;
 
-    setVault(vault.path, vault.files);
+    setPath(vault.path);
+    setFiles(vault.files);
     navigate("/main");
   };
+
+  const path = useVaultStore((s) => s.path);
+
+  useEffect(() => {
+    if (!path) return;
+
+    const init = async () => {
+      const vault = await vaultService.openVaultByPath(path);
+
+      setFiles(vault.files);
+      navigate("/main");
+    };
+
+    init();
+  }, [path]);
 
   return (
     <div className="flex flex-col gap-8 items-center justify-center">

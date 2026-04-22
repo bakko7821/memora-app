@@ -5,19 +5,21 @@ import { StartInput } from "../components/ui/StartInput";
 import { useNavigate } from "react-router-dom";
 import { useVaultStore } from "../features/vault/vaultStore";
 import { vaultService } from "../features/vault/vaultService";
+import { useVaultRuntimeStore } from "../features/vault/vaultRuntimeStore";
 
 export default function CreateFolderPage() {
   const navigate = useNavigate();
-  const setVault = useVaultStore((s) => s.setVault);
+  const setVaultPath = useVaultStore((s) => s.setPath);
+  const setFiles = useVaultRuntimeStore((s) => s.setFiles);
 
-  const [path, setPath] = useState<string | null>(null);
+  const [path, setLocalPath] = useState<string | null>(null);
   const [folderName, setFolderName] = useState("");
 
   const handleSelectPath = async () => {
     const selected = await window.electronAPI.selectFolder();
     if (!selected) return;
 
-    setPath(selected);
+    setLocalPath(selected);
   };
 
   const handleCreate = async () => {
@@ -25,7 +27,9 @@ export default function CreateFolderPage() {
 
     const finalPath = await vaultService.createVault(path, folderName);
 
-    setVault(finalPath, []);
+    setVaultPath(finalPath);
+    setFiles([]);
+
     navigate("/main");
   };
 

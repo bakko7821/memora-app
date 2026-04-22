@@ -1,13 +1,19 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 type VaultState = {
   path: string | null;
-  files: string[];
-  setVault: (path: string, files: string[]) => void;
+  setPath: (path: string) => void;
+  clear: () => void;
 };
 
-export const useVaultStore = create<VaultState>((set) => ({
-  path: null,
-  files: [],
-  setVault: (path, files) => set({ path, files }),
-}));
+export const useVaultStore = create<VaultState>()(
+  persist(
+    (set) => ({
+      path: null,
+      setPath: (path) => set({ path }),
+      clear: () => set({ path: null }),
+    }),
+    { name: "vault-storage" },
+  ),
+);

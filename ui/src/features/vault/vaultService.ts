@@ -10,4 +10,13 @@ export const vaultService = {
     const files = await window.electronAPI.readDir(path);
     return { path, files };
   },
+
+  async openVaultByPath(path: string) {
+    const files = await window.electronAPI.readDir(path);
+
+    return {
+      path,
+      files,
+    };
+  },
 };
