@@ -1,8 +1,16 @@
 import { create } from "zustand";
 
+export type VaultFile = {
+  id: string;
+  name: string;
+  extension: string;
+  createdAt: number;
+  updatedAt: number;
+};
+
 type VaultRuntimeState = {
-  files: string[];
-  setFiles: (files: string[]) => void;
+  files: VaultFile[];
+  setFiles: (files: VaultFile[]) => void;
 };
 
 export const useVaultRuntimeStore = create<VaultRuntimeState>((set) => ({

@@ -1,12 +1,18 @@
+import type { VaultFile } from "../../features/vault/vaultRuntimeStore";
+import { getFileIcon } from "../../utils/functions/getFileIcon";
+
 interface FolderNavigateComponentProps {
-  file: string;
+  file: VaultFile;
 }
 export const FolderNavigateComponent = ({
   file,
 }: FolderNavigateComponentProps) => {
+  const Icon = getFileIcon(file.extension);
+
   return (
-    <div className="cursor-pointer bg-transparent hover:bg-(--hover-card) transition-colors w-full px-3 p-1">
-      <p className="text-(--text) text-sm font-normal">{file}</p>
+    <div className="flex gap-2 items-center cursor-pointer bg-transparent hover:bg-(--hover-card) transition-colors w-full px-3 p-1">
+      {Icon}
+      <p className="text-(--text-secondary) text-sm font-normal">{file.name}</p>
     </div>
   );
 };
