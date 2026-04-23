@@ -1,31 +1,43 @@
-import { normalizeFiles } from "../../utils/functions/normalizeFiles";
 import type { VaultFile } from "./vaultRuntimeStore";
+import { readDirectory } from "../../utils/functions/readDirectory";
 
 export const vaultService = {
-  async createVault(basePath: string, folderName: string): Promise<string> {
-    return await window.electronAPI.createVault(basePath, folderName);
-  },
+  // 📁 открыть vault (выбор папки)
+  async openVault(): Promise<{
+    directoryHandle: FileSystemDirectoryHandle;
+    files: VaultFile[];
+  } | null> {
+    const dirHandle = await window.showDirectoryPicker();
+    if (!dirHandle) return null;
 
-  async openVault(): Promise<{ path: string; files: VaultFile[] } | null> {
-    const path = await window.electronAPI.selectFolder();
-    if (!path) return null;
-
-    const files = await window.electronAPI.readDir(path);
+    const files = await readDirectory(dirHandle);
 
     return {
-      path,
-      files: normalizeFiles(files),
+      directoryHandle: dirHandle,
+      files,
     };
   },
 
-  async openVaultByPath(
-    path: string,
-  ): Promise<{ path: string; files: VaultFile[] }> {
-    const files = await window.electronAPI.readDir(path);
+  // ❌ больше НЕ существует в браузере
+  async openVaultByPath(): Promise<never> {
+    throw new Error("openVaultByPath is not supported in browser");
+  },
 
-    return {
-      path,
-      files: normalizeFiles(files),
-    };
+  // ❌ тоже нельзя (нет прямого доступа к fs)
+  async createVault(): Promise<never> {
+    throw new Error("createVault via path is not supported in browser");
+  },
+
+  // 📄 чтение файла
+  async readFile(handle: FileSystemFileHandle) {
+    const file = await handle.getFile();
+    return await file.text();
+  },
+
+  // ✍️ запись файла
+  async writeFile(handle: FileSystemFileHandle, content: string) {
+    const writable = await handle.createWritable();
+    await writable.write(content);
+    await writable.close();
   },
 };

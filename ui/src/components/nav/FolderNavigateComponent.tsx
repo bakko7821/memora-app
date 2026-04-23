@@ -1,4 +1,7 @@
-import type { VaultFile } from "../../features/vault/vaultRuntimeStore";
+import {
+  useVaultRuntimeStore,
+  type VaultFile,
+} from "../../features/vault/vaultRuntimeStore";
 import { getFileIcon } from "../../utils/functions/getFileIcon";
 
 interface FolderNavigateComponentProps {
@@ -9,10 +12,15 @@ export const FolderNavigateComponent = ({
 }: FolderNavigateComponentProps) => {
   const Icon = getFileIcon(file.extension);
 
+  const { setCurrentFile } = useVaultRuntimeStore();
+
   return (
-    <div className="flex gap-2 items-center cursor-pointer bg-transparent hover:bg-(--hover-card) transition-colors w-full px-3 p-1">
+    <li
+      onClick={() => setCurrentFile(file.id)}
+      className="flex gap-2 items-center cursor-pointer bg-transparent hover:bg-(--hover-card) transition-colors w-full px-3 p-1"
+    >
       {Icon}
       <p className="text-(--text-secondary) text-sm font-normal">{file.name}</p>
-    </div>
+    </li>
   );
 };

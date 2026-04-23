@@ -6,25 +6,28 @@ import SwapIcon from "../../assets/icons/ArrowSwap.svg?react";
 
 export const FolderNavigateMenu = () => {
   const files = useVaultRuntimeStore((s) => s.files);
-  const path = useVaultStore((s) => s.path);
+  const directoryHandle = useVaultStore((s) => s.directoryHandle);
 
-  const folderName = path
-    ? path.replace(/\\/g, "/").split("/").filter(Boolean).pop()
-    : "";
+  const folderName = directoryHandle?.name ?? "";
 
   return (
     <div className="flex flex-col items-stretch justify-between bg-(--card) h-full border-r-2 border-(--border) min-w-70">
+      {/* FILE LIST */}
       <ul>
-        {files?.map((file, index) => (
-          <li>
-            <FolderNavigateComponent key={index} file={file} />
-          </li>
+        {files.map((file) => (
+          <FolderNavigateComponent key={file.id} file={file} />
         ))}
       </ul>
+
+      {/* FOOTER */}
       <div className="w-full flex items-center justify-between border-t-2 border-(--border)">
         <div className="flex gap-2 items-center justify-center px-3 p-1">
-          <p className="text-xl font-semibold text-(--primary)">{folderName}</p>
+          <p className="text-xl font-semibold text-(--primary)">
+            <span className="text-(--text-secondary)">../</span>
+            {folderName || "No vault"}
+          </p>
         </div>
+
         <div className="flex items-center justify-center px-3 p-1">
           <button className="cursor-pointer group relative p-1">
             <SwapIcon
@@ -33,6 +36,7 @@ export const FolderNavigateMenu = () => {
               className="text-(--disabled-text) group-hover:text-(--hover-secondary) transition-colors"
             />
           </button>
+
           <button className="cursor-pointer group relative p-1">
             <SettingsIcon
               width={24}
