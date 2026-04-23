@@ -11,7 +11,7 @@ export const FolderNavigateMenu = () => {
   const folderName = directoryHandle?.name ?? "";
 
   return (
-    <div className="flex flex-col items-stretch justify-between bg-(--card) h-full border-r-2 border-(--border) min-w-70">
+    <div className="flex flex-col items-stretch justify-between bg-(--card) h-full border-r-2 border-(--border) w-full">
       {/* FILE LIST */}
       <ul>
         {files.map((file) => (

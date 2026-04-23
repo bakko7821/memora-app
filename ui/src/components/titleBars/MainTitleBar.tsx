@@ -1,10 +1,11 @@
-import CrossIcon from "../assets/icons/cross-svgrepo-com.svg?react";
-import MinimizeIcon from "../assets/icons/minus-svgrepo-com.svg?react";
-import MaximizeIcon from "../assets/icons/Maximize2.svg?react";
-import RestoreIcon from "../assets/icons/restore-16-regular-svgrepo-com.svg?react";
+import CrossIcon from "../../assets/icons/cross-svgrepo-com.svg?react";
+import MinimizeIcon from "../../assets/icons/minus-svgrepo-com.svg?react";
+import MaximizeIcon from "../../assets/icons/Maximize2.svg?react";
+import RestoreIcon from "../../assets/icons/restore-16-regular-svgrepo-com.svg?react";
 import { useEffect, useState } from "react";
+import { FilesHistory } from "../FilesHistory";
 
-export const TitleBar = () => {
+export const MainTitleBar = () => {
   const [isMaximized, setIsMaximized] = useState(false);
 
   useEffect(() => {
@@ -34,16 +35,15 @@ export const TitleBar = () => {
 
   return (
     <header
-      className="w-full p-0 flex flex-row items-center justify-between bg-(--header)"
-      style={
-        {
-          WebkitAppRegion: "drag",
-        } as React.CSSProperties
-      }
+      className="w-full p-0 flex flex-row items-center justify-start bg-(--header)"
+      // style={
+      //   {
+      //     WebkitAppRegion: "drag",
+      //   } as React.CSSProperties
+      // }
     >
-      <div className="flex flex-row items-center justify-center">
-        <p className="pl-3 text-base font-normal text-(--text)">Memora</p>
-      </div>
+      <div className="bg-green-300 h-full w-(--titlebar-width)"></div>
+      <FilesHistory />
       <div
         className="flex flex-row gap-0"
         style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}

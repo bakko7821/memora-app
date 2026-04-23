@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { MainTitleBar } from "../components/MainTitleBar";
+import { MainTitleBar } from "../components/titleBars/MainTitleBar";
 import { NavigateMenu } from "../components/nav/NavigateMenu";
 import { FolderNavigateMenu } from "../components/nav/FolderNavigateMenu";
 
@@ -8,7 +8,7 @@ export const MainLayout = () => {
     <>
       <MainTitleBar />
       <main className="w-full flex flex-1 items-start justify-start h-full">
-        <div className="h-full flex gap-0">
+        <div className="h-full flex gap-0 w-(--titlebar-width)">
           <NavigateMenu />
           <FolderNavigateMenu />
         </div>

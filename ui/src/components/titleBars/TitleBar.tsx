@@ -1,10 +1,10 @@
-import CrossIcon from "../assets/icons/cross-svgrepo-com.svg?react";
-import MinimizeIcon from "../assets/icons/minus-svgrepo-com.svg?react";
-import MaximizeIcon from "../assets/icons/Maximize2.svg?react";
-import RestoreIcon from "../assets/icons/restore-16-regular-svgrepo-com.svg?react";
+import CrossIcon from "../../assets/icons/cross-svgrepo-com.svg?react";
+import MinimizeIcon from "../../assets/icons/minus-svgrepo-com.svg?react";
+import MaximizeIcon from "../../assets/icons/Maximize2.svg?react";
+import RestoreIcon from "../../assets/icons/restore-16-regular-svgrepo-com.svg?react";
 import { useEffect, useState } from "react";
 
-export const MainTitleBar = () => {
+export const TitleBar = () => {
   const [isMaximized, setIsMaximized] = useState(false);
 
   useEffect(() => {
@@ -41,7 +41,9 @@ export const MainTitleBar = () => {
         } as React.CSSProperties
       }
     >
-      <div className="flex flex-row items-center justify-center"></div>
+      <div className="flex flex-row items-center justify-center">
+        <p className="pl-3 text-base font-normal text-(--text)">Memora</p>
+      </div>
       <div
         className="flex flex-row gap-0"
         style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
