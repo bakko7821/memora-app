@@ -1,3 +1,4 @@
+import { Editor } from "../components/ui/Editor";
 import { FileTitleBar } from "../components/ui/FileTitleBar";
 import { useVaultRuntimeStore } from "../features/vault/vaultRuntimeStore";
 
@@ -34,6 +35,9 @@ export default function MainPage() {
     //   />
     // </div>
 
-    <div className=""></div>
+    <div className=" w-full h-full flex flex-col gap-0">
+      <FileTitleBar title={currentFile.name} />
+      <Editor value={currentFileContent} onChange={updateCurrentFileContent} />
+    </div>
   );
 }
