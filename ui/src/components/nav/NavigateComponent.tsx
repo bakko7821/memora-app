@@ -1,21 +1,29 @@
 import { Link } from "react-router-dom";
 import type { NavComponent } from "../../entities/types/navigate";
 
-export const NavigateComponent = ({ path, icon: Icon, type }: NavComponent) => {
+export const NavigateComponent = ({
+  path,
+  icon: Icon,
+  type,
+  onClick,
+}: NavComponent) => {
   if (type === "button")
     return (
-      <button className="cursor-pointer p-2 flex items-center justify-center hover:bg-(--hover-card) transition-colors">
-        <Icon width={24} height={24} className="text-(--text-secondary) " />
+      <button
+        onClick={onClick}
+        className="cursor-pointer p-2 flex items-center justify-center hover:bg-(--hover-card) transition-colors"
+      >
+        <Icon width={24} height={24} className="text-(--text-secondary)" />
       </button>
     );
 
   if (type === "link")
     return (
       <Link
-        to={path}
+        to={path || ""}
         className="cursor-pointer p-2 flex items-center justify-center hover:bg-(--hover-card) transition-colors"
       >
-        <Icon width={24} height={24} className="text-(--text-secondary) " />
+        <Icon width={24} height={24} className="text-(--text-secondary)" />
       </Link>
     );
 };

@@ -9,10 +9,11 @@ type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 
 export interface NavComponent {
   id: number;
-  path: string;
+  path?: string;
   name: string;
   type: NavigateType;
   icon: IconType;
+  onClick?: () => void;
 }
 
 export const NavComponentsArray: NavComponent[] = [
@@ -20,14 +21,12 @@ export const NavComponentsArray: NavComponent[] = [
     id: 0,
     name: "fast-navigate",
     type: "button",
-    path: "",
     icon: FastSearchIcon,
   },
   {
     id: 1,
     name: "create",
     type: "button",
-    path: "",
     icon: CreateIcon,
   },
   {
