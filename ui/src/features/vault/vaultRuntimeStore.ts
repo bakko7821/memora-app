@@ -2,14 +2,17 @@ import { create } from "zustand";
 import { vaultService } from "./vaultService";
 import { useFilesHistoryStore } from "../fileHistory/fileHistoryStore";
 
-export type VaultFile = {
+export interface BaseVaultFile {
   id: string;
   name: string;
   extension: string;
-  createdAt: number;
-  updatedAt: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface VaultFile extends BaseVaultFile {
   handle: FileSystemFileHandle;
-};
+}
 
 type VaultRuntimeState = {
   files: VaultFile[];
@@ -20,6 +23,7 @@ type VaultRuntimeState = {
   setFiles: (files: VaultFile[]) => void;
   setCurrentFile: (id: string) => Promise<void>;
   updateCurrentFileContent: (content: string) => void;
+  clearCurrentFile: () => void;
 };
 
 export const useVaultRuntimeStore = create<VaultRuntimeState>((set, get) => ({
@@ -35,9 +39,13 @@ export const useVaultRuntimeStore = create<VaultRuntimeState>((set, get) => ({
 
     if (!file) return;
 
-    set({ currentFileId: fileId });
+    const content = await vaultService.readFile(file.handle);
 
-    // 🔥 синхронизация с вкладками
+    set({
+      currentFileId: fileId,
+      currentFileContent: content,
+    });
+
     useFilesHistoryStore.getState().openTab({
       id: file.id,
       name: file.name,
@@ -53,5 +61,12 @@ export const useVaultRuntimeStore = create<VaultRuntimeState>((set, get) => ({
     if (!file) return;
 
     vaultService.writeFile(file.handle, content);
+  },
+
+  clearCurrentFile: () => {
+    set({
+      currentFileId: null,
+      currentFileContent: "",
+    });
   },
 }));

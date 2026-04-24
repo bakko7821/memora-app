@@ -1,12 +1,12 @@
-import type { VaultFile } from "../../features/vault/vaultRuntimeStore";
+import type { BaseVaultFile } from "../../features/vault/vaultRuntimeStore";
 
-export const normalizeFiles = (files: string[]): VaultFile[] => {
+export const normalizeFiles = (files: string[]): BaseVaultFile[] => {
   return files.map((file) => {
     const parts = file.split(".");
     const extension = parts.at(-1) ?? "";
     const name = parts.slice(0, -1).join(".");
 
-    const now = Date.now();
+    const now = new Date();
 
     return {
       id: crypto.randomUUID(),

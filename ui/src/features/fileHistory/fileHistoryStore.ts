@@ -43,7 +43,13 @@ export const useFilesHistoryStore = create<FilesHistoryState>((set, get) => ({
     });
 
     // 🔥 синхронизация с runtime (важно)
-    useVaultRuntimeStore.getState().setCurrentFile(newActiveId ?? "");
+    const runtime = useVaultRuntimeStore.getState();
+
+    if (newActiveId) {
+      runtime.setCurrentFile(newActiveId);
+    } else {
+      runtime.clearCurrentFile(); // 👈 добавим
+    }
   },
 
   setActiveTab: (id) => {

@@ -1,4 +1,4 @@
-import type { VaultFile } from "./vaultRuntimeStore";
+import { useVaultRuntimeStore, type VaultFile } from "./vaultRuntimeStore";
 import { readDirectory } from "../../utils/functions/readDirectory";
 
 export const vaultService = {
@@ -32,13 +32,42 @@ export const vaultService = {
     name: string,
     content = "",
   ): Promise<FileSystemFileHandle> {
-    const fileHandle = await directoryHandle.getFileHandle(name, {
-      create: true,
-    });
+    let fileHandle: FileSystemFileHandle;
+    const runtime = useVaultRuntimeStore.getState();
 
-    const writable = await fileHandle.createWritable();
-    await writable.write(content);
-    await writable.close();
+    // 🔍 1. получить или создать файл
+    try {
+      fileHandle = await directoryHandle.getFileHandle(name);
+    } catch {
+      fileHandle = await directoryHandle.getFileHandle(name, {
+        create: true,
+      });
+
+      const writable = await fileHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+    }
+
+    // 🧠 2. проверяем, не существует ли уже VaultFile
+    let existing = runtime.files.find((f) => f.name === name);
+
+    if (!existing) {
+      const now = new Date();
+
+      existing = {
+        id: crypto.randomUUID(),
+        name,
+        extension: name.split(".").pop() ?? "",
+        handle: fileHandle,
+        createdAt: now,
+        updatedAt: now,
+      };
+
+      runtime.setFiles([...runtime.files, existing]);
+    }
+
+    // 🎯 3. синхронизация runtime
+    runtime.setCurrentFile(existing.id);
 
     return fileHandle;
   },

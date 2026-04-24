@@ -11,8 +11,8 @@ export const readDirectory = async (dirHandle: FileSystemDirectoryHandle) => {
         id: crypto.randomUUID(),
         name: entry.name,
         extension: entry.name.split(".").pop() || "",
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
         handle: fileHandle, // ✅ теперь тип совпадает
       });
     }
