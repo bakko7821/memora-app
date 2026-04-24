@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { vaultService } from "./vaultService";
+import { useFilesHistoryStore } from "../fileHistory/fileHistoryStore";
 
 export type VaultFile = {
   id: string;
@@ -29,17 +30,17 @@ export const useVaultRuntimeStore = create<VaultRuntimeState>((set, get) => ({
 
   setFiles: (files) => set({ files }),
 
-  setCurrentFile: async (id) => {
-    const { files } = get();
+  setCurrentFile: async (fileId: string): Promise<void> => {
+    const file = get().files.find((f) => f.id === fileId);
 
-    const file = files.find((f) => f.id === id);
     if (!file) return;
 
-    const content = await vaultService.readFile(file.handle);
+    set({ currentFileId: fileId });
 
-    set({
-      currentFileId: id,
-      currentFileContent: content,
+    // 🔥 синхронизация с вкладками
+    useFilesHistoryStore.getState().openTab({
+      id: file.id,
+      name: file.name,
     });
   },
 
